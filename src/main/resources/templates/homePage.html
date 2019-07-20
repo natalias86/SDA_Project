@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<h1> Home Page - Travel Agency</h1>
+<a th:href="@{/login}">login</a>
+<a th:href="@{/logout}">logout</a>
+<a th:href="@{/post/admin/adminpanel}">Admin panel</a>
+
+<form>
+    <br>
+    <select id="continents">
+        <option th:each="dropDownContinent: ${continentsList}"
+                th:value="${dropDownContinent.continentId}"
+                th:text="${dropDownContinent.continent}"
+        />
+    </select>
+    <!--
+  <select  th:field="*{countryEntity.countryId}>
+      <option th:each="dropDownCuntry: ${countriessList}"
+              th:value="${dropDownCountry.countryId}"
+              th:text="${dropDownCountry.country}"
+      />
+
+  </select>
+  <select th:field="*{cityEntity.cityId}>
+      <option th:each="dropDownCity: ${citiesList}"
+              th:value="${dropDownCity.cityId}"
+              th:text="${dropDownCity.city}"
+      />
+  </select>
+  <select th:field="*{hotelEntity.hotelId}>
+      <option th:each="dropDownHotel : ${hotelsList}"
+              th:value="${dropDownHotel.hotelId}"
+              th:text="${dropDownHotel.name}"
+      />
+  </select>
+  -->
+
+    <input type="button" value="find">
+</form>
+
+<div>
+    <h3>All travels:</h3>
+    <div th:each="post : ${allPosts}">
+        <p th:text="${post.postTitle}"></p>
+        <p th:textarea="${post.postDescription}"></p>
+        <label>Price: </label>
+        <span th:text="${post.price}">price: </span>
+        <label>PLN</label>
+        <br>
+        <label>Start date:</label>
+        <span th:text="${post.startDate}">start date: </span>
+        <br>
+        <label>End date:</label>
+        <span th:text="${post.endDate}">end date: </span>
+        <br>
+        <label>Type:</label>
+        <span th:text="${post.type}"></span>
+        <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
+        <br>
+        <hr/>
+    </div>
+</div>
+<!-- <h3>Promoted:</h3>
+ <div th:each="post : ${allPosts}">
+     <div th:if="${post.isPromoted}">
+
+         <p th:text="${post.postTitle}"></p>
+         <p th:textarea="${post.postDescription}"></p>
+         <p th:text="${post.price}"></p>
+         <p th:text="${post.startDate}"></p>
+         <p th:text="${post.endDate}"></p>
+         <p th:text="${post.type}"></p>
+         <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
+         <br>
+
+         <hr/>
+     </div>
+ </div>-->
+
+</body>
+<script>
+    $(document).ready(function () {
+        $('#continents').change(function () {
+            console.log("changed")
+            $('#search').submit()
+        });
+    });
+</script>
+
+</html>

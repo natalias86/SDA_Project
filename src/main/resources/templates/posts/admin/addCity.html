@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add city</title>
+</head>
+<body>
+<h3>Add city</h3>
+<form method="post" th:action="@{/post/admin/addcity}" th:object="${addCity}">
+    Enter city: <input type="text" th:field="*{city}">
+    <br>
+    <label>Select country:</label>
+    <select th:field="*{countryEntity.countryId}">
+        <option th:each="dropDownCountry: ${countriesList}"
+                th:value="${dropDownCountry.countryId}"
+                th:text="${dropDownCountry.country}"
+        />
+    </select>
+    <br>
+    <input type="submit" value="add">
+</form>
+</body>
+</html>

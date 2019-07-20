@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+
+</head>
+<body>
+<h2>Admin panel</h2>
+<form method="get" th:action="@{/post/admin/adminpanel}">
+    <a href="/post/admin/add">add post</a>
+    <br>
+    <a href="/post/admin/edit">edit post</a>
+    <br>
+    <a href="/post/admin/remove">remove post</a>
+    <br>
+    <a href="/post/admin/addcountry">add country</a>
+    <br>
+    <a href="/post/admin/addcity">add city</a>
+
+</form>
+</body>
+</html>
