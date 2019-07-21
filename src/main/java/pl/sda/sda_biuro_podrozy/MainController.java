@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.sda_biuro_podrozy.dto.CityDto;
 import pl.sda.sda_biuro_podrozy.dto.HotelDto;
 import pl.sda.sda_biuro_podrozy.dto.PostDto;
@@ -19,6 +17,7 @@ import pl.sda.sda_biuro_podrozy.service.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,10 +59,10 @@ public class MainController {
         return "homePage";
     }
 */
-  @Getter
+    @Getter
     @Setter
-  @ToString
-  @NoArgsConstructor
+    @ToString
+    @NoArgsConstructor
     static class SelectedCriteriasForm {
         private Integer continentId;
         private Integer countryId;
@@ -76,29 +75,35 @@ public class MainController {
         }
     }
 
-    @GetMapping("/homepage")
+    @RequestMapping(value = "/homepage", method = {RequestMethod.GET})
     public String showMainForm(@ModelAttribute("criteriaForm") SelectedCriteriasForm form, Model model) {
-     List<ContinentEntity> continentsList = continentService.getListOfContinents();
-    List<CountryEntity> countriesList = countryService.getListOfCountries();
-    List<CityEntity> citiesList = cityService.getListOfCities();
-//            List<HotelEntity> hotelsList = hotelService.getListOfHotels();
-//        if (form.continentId != null) {
-//            model.addAttribute("countinent","" )
-//        }
+
+        List<ContinentEntity> continentsList = continentService.getListOfContinents();
+        List<CountryEntity> countriesList;
+        if (form.getContinentId() != null) {
+           // todo load country list by continent id
+            countriesList = Arrays.asList(countryService.getListOfCountries().iterator().next());
+        } else {
+             countriesList = countryService.getListOfCountries();
+        }
+        List<CityEntity> citiesList = cityService.getListOfCities();
+
+
         System.out.println(form);
         model.addAttribute("continentsList", continentsList);
         model.addAttribute("countriesList", countriesList);
         model.addAttribute("citiesList", citiesList);
+//        model.addAttribute("posts")
 
         return "homePage";
     }
+
     @PostMapping("/homepage")
     public String selectPosts(SelectedCriteriasForm form, PostDto postDto, Model model) {
 
 
         return "posts/selectedPosts";
     }
-
 
 
 }
