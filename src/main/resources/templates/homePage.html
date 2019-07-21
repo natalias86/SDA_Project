@@ -15,37 +15,45 @@
 <a th:href="@{/logout}">logout</a>
 <a th:href="@{/post/admin/adminpanel}">Admin panel</a>
 
-<form>
+<form  method="post" th:action="@{/homepage}" th:object="${criteriaForm}">
     <br>
-    <select id="continents">
+    <select>
         <option th:each="dropDownContinent: ${continentsList}"
                 th:value="${dropDownContinent.continentId}"
                 th:text="${dropDownContinent.continent}"
         />
     </select>
+
+    <select>
+        <option th:each="dropDownCountry: ${countriesList}"
+                th:value="${dropDownCountry.countryId}"
+                th:text="${dropDownCountry.country}"
+        />
+
+    </select>
+    <select>
+        <option th:each="dropDownCity: ${citiesList}"
+                th:value="${dropDownCity.cityId}"
+                th:text="${dropDownCity.city}"
+        />
+    </select>
+<!--    <select>
+         <option th:each="dropDownHotel : ${hotelsListByStandard}"
+            th:value="${dropDownHotel.hotelId}"
+            th:text="${dropDownHotel.standard}"
+        />
+    </select>-->
     <!--
-  <select  th:field="*{countryEntity.countryId}>
-      <option th:each="dropDownCuntry: ${countriessList}"
-              th:value="${dropDownCountry.countryId}"
-              th:text="${dropDownCountry.country}"
-      />
+ <select th:field="*{hotelEntity.hotelId}>
+     <option th:each="dropDownHotel : ${hotelsList}"
+             th:value="${dropDownHotel.hotelId}"
+             th:text="${dropDownHotel.name}"
+     />
+ </select>
+ -->
 
-  </select>
-  <select th:field="*{cityEntity.cityId}>
-      <option th:each="dropDownCity: ${citiesList}"
-              th:value="${dropDownCity.cityId}"
-              th:text="${dropDownCity.city}"
-      />
-  </select>
-  <select th:field="*{hotelEntity.hotelId}>
-      <option th:each="dropDownHotel : ${hotelsList}"
-              th:value="${dropDownHotel.hotelId}"
-              th:text="${dropDownHotel.name}"
-      />
-  </select>
-  -->
-
-    <input type="button" value="find">
+    <input type="submit" value="select">
+    <!-- <input type="button" value="find">-->
 </form>
 
 <div>

@@ -24,7 +24,7 @@ public class HotelEntity {
     private String name;
 
     @Column(name = "standard")
-    @Size(min=1,max=5)
+    @NotNull
     private int standard;
 
     @Column(name = "description")

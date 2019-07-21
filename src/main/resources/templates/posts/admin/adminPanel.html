@@ -10,14 +10,35 @@
 <form method="get" th:action="@{/post/admin/adminpanel}">
     <a href="/post/admin/add">add post</a>
     <br>
-    <a href="/post/admin/edit">edit post</a>
-    <br>
-    <a href="/post/admin/remove">remove post</a>
-    <br>
     <a href="/post/admin/addcountry">add country</a>
     <br>
     <a href="/post/admin/addcity">add city</a>
-
+    <br>
+    <a href="/post/admin/addhotel">add hotel</a>
 </form>
+
+<div>
+    <h3>All travels:</h3>
+    <div th:each="post : ${allPosts}">
+        <p th:text="${post.postTitle}"></p>
+        <p th:textarea="${post.postDescription}"></p>
+        <label>Price: </label>
+        <span th:text="${post.price}">price: </span>
+        <label>PLN</label>
+        <br>
+        <label>Start date:</label>
+        <span th:text="${post.startDate}">start date: </span>
+        <br>
+        <label>End date:</label>
+        <span th:text="${post.endDate}">end date: </span>
+        <br>
+        <label>Type:</label>
+        <span th:text="${post.type}"></span>
+        <a th:href="@{/post/admin/edit/{id}(id=${post.postId})}">edit post</a>
+        <a th:href="@{/post/admin/delete/{id}(id=${post.postId})}">delete post</a>
+        <br>
+        <hr/>
+    </div>
+</div>
 </body>
 </html>

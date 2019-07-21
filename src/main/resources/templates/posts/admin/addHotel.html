@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add hotel</title>
+</head>
+<body>
+
+<form method="post" th:action="@{/post/admin/addhotel}" th:object="${addHotel}">
+    Enter hotel name: <input type="text" th:field="*{name}" th:errorClass="error"><span th:errors="*{name}"></span>
+    <br>
+    Enter standard: <input type="text" th:field="*{standard}" th:errorClass="error"><span th:errors="*{standard}"></span>
+    <label>stars</label>
+    <br>
+    Enter description: <input type="text" th:field="*{description}" th:errorClass="error"><span th:errors="*{description}"></span>
+    <br>
+    <label>Select country:</label>
+    <select th:field="*{cityEntity.cityId}">
+        <option th:each="dropDownCity: ${citiesList}"
+                th:value="${dropDownCity.cityId}"
+                th:text="${dropDownCity.city}"
+        />
+    </select>
+    <br>
+    <input type="submit" value="add">
+</form>
+</body>
+</html>

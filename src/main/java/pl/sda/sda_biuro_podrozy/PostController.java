@@ -33,7 +33,6 @@ public class PostController {
         return "posts/admin/addPost";
     }
 
-    //TODO: add post doesn't work
     @PostMapping("/post/admin/add")
     public String addPost(@ModelAttribute("addPost") @Valid PostDto postDto,
                           BindingResult bindingResult,
