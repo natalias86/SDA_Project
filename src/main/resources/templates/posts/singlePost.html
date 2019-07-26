@@ -1,22 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Single Post</title>
 </head>
 <body>
-<h1>Singe post</h1>
+<div th:replace="fragments/header :: header"></div>
+<a href="/homepage">Back to HomePage</a>
+<h2 th:text="${post.postTitle}"></h2>
 
-    <p th:text="${post.postTitle}"></p>
-    <p th:text="${post.postDescription}"></p>
-    <span th:text="${post.price}"></span>
-    <label>PLN</label>
-    <p th:text="${post.vacancy}"></p>
-    <p th:text="${post.startDate}"></p>
-    <p th:text="${post.endDate}"></p>
-    <p th:text="${post.type}"></p>
+<img th:src="@{/css/images/exampleImage2.jpg}" alt="image not available" width="250"
+     height="200"/>
+<img th:src="@{/css/images/exampleImage3.jpg}" alt="image not available"  width="250"
+     height="200"/>
+<img th:src="@{/css/images/exampleImage4.jpg}" alt="image not available"  width="250"
+     height="200"/>
+<br>
+   Description: <span th:text="${post.postDescription}"></span>
+<br>
+    Start date: <span th:text="${post.startDate}"></span>
+<br>
+    End date:  <span th:text="${post.endDate}"></span>
+<br>
+    Type:  <span th:text="${post.type}"></span>
+<br>
+    Price:  <span th:text="${post.price}"></span>
+    <label>PLN/person</label>
     <br>
-<button type="button">Buy</button>
 
+<form method="post" th:action="@{/cart/post/{postId}}">
+<!--
+    Enter number of travelers: <input type="text" th:field="*{numberOfTravelers}">
+    <br>
+    -->
+
+    <input type="submit" value="Buy Now">
+</form>
 </body>
 </html>

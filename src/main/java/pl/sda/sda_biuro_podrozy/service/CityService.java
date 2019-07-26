@@ -22,6 +22,17 @@ public class CityService {
         List<CityEntity> cities = cityRepository.findAll();
         return cities;
     }
+    public List<CityEntity> getListOfCitiesByCountry(CountryEntity countryEntity) {
+
+        List<CityEntity> citiesByCountry = cityRepository.findByCountryEntity(countryEntity);
+        return citiesByCountry;
+    }
+
+    public CityEntity getCityById(Integer cityId){
+        CityEntity city = cityRepository.findById(cityId).orElseThrow(RuntimeException::new);
+        return city;
+
+    }
 
     public void addCity(CityDto cityDto) {
         CityEntity cityEntity = new CityEntity();
@@ -29,4 +40,5 @@ public class CityService {
         cityEntity.setCountryEntity(cityDto.getCountryEntity());
         cityRepository.save(cityEntity);
     }
+
 }

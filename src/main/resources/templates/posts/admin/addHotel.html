@@ -14,7 +14,7 @@
     <br>
     Enter description: <input type="text" th:field="*{description}" th:errorClass="error"><span th:errors="*{description}"></span>
     <br>
-    <label>Select country:</label>
+    <label>Select city:</label>
     <select th:field="*{cityEntity.cityId}">
         <option th:each="dropDownCity: ${citiesList}"
                 th:value="${dropDownCity.cityId}"

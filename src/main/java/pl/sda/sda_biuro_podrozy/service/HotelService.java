@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.sda.sda_biuro_podrozy.dto.CityDto;
 import pl.sda.sda_biuro_podrozy.dto.HotelDto;
 import pl.sda.sda_biuro_podrozy.entities.CityEntity;
+import pl.sda.sda_biuro_podrozy.entities.CountryEntity;
 import pl.sda.sda_biuro_podrozy.entities.HotelEntity;
 import pl.sda.sda_biuro_podrozy.repository.HotelRepository;
 
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class HotelService {
-    @Autowired//  wstrzykniecie obiektu do referencji
-            HotelRepository hotelRepository;
+    @Autowired
+    HotelRepository hotelRepository;
 
     public List<HotelEntity> getListOfHotels() {
         List<HotelEntity> hotels = hotelRepository.findAll();
@@ -36,6 +37,7 @@ public class HotelService {
 
     }
 //TODO: distinct by standard to return HotelEntity
+
 /*     public List<Integer> getListOfHotelsByStandard(){
          List<HotelEntity> hotels = hotelRepository.findAll();
 
@@ -43,5 +45,10 @@ public class HotelService {
                  //filter(distinctByKey(HotelEntity::getStandard)).collect(Collectors.toList());
          return hotelsByStandard;
      }*/
+public List<HotelEntity> getListOfHotelsByCity(CityEntity cityEntity) {
+
+    List<HotelEntity> hotelsByCity = hotelRepository.findByCityEntity(cityEntity);
+    return hotelsByCity;
+}
 
 }

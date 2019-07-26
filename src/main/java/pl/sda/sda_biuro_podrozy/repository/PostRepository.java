@@ -12,6 +12,7 @@ import java.util.Optional;
     @Override
     Optional<PostEntity> findById(Integer postId);
 
+
   /*  List<PostEntity> findByHotelEntity_Standard(Integer standard);
     List<PostEntity> findAllByHotelEntity ();*/
 

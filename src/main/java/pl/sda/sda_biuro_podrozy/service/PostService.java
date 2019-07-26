@@ -10,6 +10,7 @@ import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -34,7 +35,6 @@ public class PostService {
         post.setHotelEntity(postDto.getHotelEntity());
         post.setPromoted(postDto.isPromoted());
         postRepository.save(post);
-
     }
 
     public List<PostEntity> getPublishedPosts() {
@@ -57,14 +57,6 @@ public class PostService {
         return singlePost;
     }
 
-/*    public List<List<PostEntity>> getPostsByCriteria(List<HotelEntity> listOfHotels) {
-        List<List<PostEntity>> postsByCriteria = new ArrayList<>();
-        for (HotelEntity hotel : listOfHotels) {
-            List<PostEntity> postsByHotel = postRepository.findAllByHotelEntity();
-            postsByCriteria.add(postsByHotel);
-        }
-        return postsByCriteria;
-    }*/
 
 /*    public List<PostEntity> getPostsByHotelStandard(Integer hotelStandard) {
         List<PostEntity> postsByHotelStandard = postRepository.findByHotelEntity_Standard(hotelStandard);
@@ -74,5 +66,7 @@ public class PostService {
         List<PostEntity> postsByHotelStandard = postRepository.finAllBy
         return postsByHotelStandard;
     }*/
+
+
 }
 

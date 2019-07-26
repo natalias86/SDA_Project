@@ -27,4 +27,14 @@ public class CountryService {
         countryEntity.setContinentEntity(countryDto.getContinentEntity());
         countryRepository.save(countryEntity);
     }
+
+    public List<CountryEntity> getListOfCountriesByContinent(ContinentEntity continentEntity) {
+        List<CountryEntity> countriesByContinent = countryRepository.findByContinentEntity(continentEntity);
+        return countriesByContinent;
+    }
+
+    public CountryEntity getCountryById(Integer countryId) {
+        CountryEntity country = countryRepository.findById(countryId).orElseThrow(RuntimeException::new);
+        return country;
+    }
 }

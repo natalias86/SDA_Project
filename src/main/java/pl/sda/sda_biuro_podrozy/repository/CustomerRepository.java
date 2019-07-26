@@ -2,13 +2,11 @@ package pl.sda.sda_biuro_podrozy.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.sda.sda_biuro_podrozy.entities.CustomerEntity;
 import pl.sda.sda_biuro_podrozy.entities.UserEntity;
 
-import java.util.Optional;
+//@Repository
+public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer>{
 
-@Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    boolean existsByEmail (String email);
-   Optional<UserEntity> findByEmail(String email);
-
+        boolean existsByUserEntity(UserEntity userEntity);
 }

@@ -17,7 +17,7 @@
       <br>-->
     Enter title: <input type="text" th:field="*{postTitle}" th:errorClass="error"><span th:errors="*{postTitle}"></span>
     <br>
-    Enter description: <input type="text" th:field="*{postDescription}" th:errorClass="error"><span th:errors="*{postDescription}"></span>
+    Enter description: <textarea cols="20" rows="5" th:field="*{postDescription}" th:errorClass="error"></textarea><span th:errors="*{postDescription}"></span>
     <br>
     Enter start date:<input type="date" th:field="*{startDate}" th:errorClass="error"><span th:errors="*{startDate}"></span>
     <br>

@@ -13,7 +13,7 @@ import java.util.List;
 public class ContinentService {
     @Autowired
     ContinentRepository continentRepository;
-
+//TODO delete if not needed
     public List<String> getListOfContinentsString() {
         List<ContinentEntity> continentsEnt = continentRepository.findAll();
         List<String> continents = new ArrayList<>();
@@ -27,5 +27,11 @@ public class ContinentService {
     public List<ContinentEntity> getListOfContinents() {
         List<ContinentEntity> continents = continentRepository.findAll();
         return continents;
+    }
+
+    public ContinentEntity getContinentById(Integer continentId) {
+        ContinentEntity continent = continentRepository.findById(continentId).orElseThrow(RuntimeException::new);
+        return continent;
+
     }
 }

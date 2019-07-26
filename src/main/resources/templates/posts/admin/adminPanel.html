@@ -6,6 +6,7 @@
 
 </head>
 <body>
+<div> <a th:href="@{/homepage}">Back to homepage</a></div>
 <h2>Admin panel</h2>
 <form method="get" th:action="@{/post/admin/adminpanel}">
     <a href="/post/admin/add">add post</a>
@@ -19,6 +20,7 @@
 
 <div>
     <h3>All travels:</h3>
+
     <div th:each="post : ${allPosts}">
         <p th:text="${post.postTitle}"></p>
         <p th:textarea="${post.postDescription}"></p>

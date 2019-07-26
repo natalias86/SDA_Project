@@ -1,4 +1,4 @@
-package pl.sda.sda_biuro_podrozy;
+package pl.sda.sda_biuro_podrozy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.sda.sda_biuro_podrozy.cart.ItemEntity;
+import pl.sda.sda_biuro_podrozy.cart.ItemRepository;
 import pl.sda.sda_biuro_podrozy.dto.PostDto;
 import pl.sda.sda_biuro_podrozy.entities.ContinentEntity;
 import pl.sda.sda_biuro_podrozy.entities.HotelEntity;
 import pl.sda.sda_biuro_podrozy.entities.PostEntity;
+import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import pl.sda.sda_biuro_podrozy.service.HotelService;
 import pl.sda.sda_biuro_podrozy.service.PostService;
 
@@ -20,10 +23,16 @@ import java.util.List;
 
 @Controller
 public class PostController {
+
+   private PostService postService;
+   private HotelService hotelService;
+   private PostRepository postRepository;
     @Autowired
-    PostService postService;
-    @Autowired
-    HotelService hotelService;
+    public PostController(PostService postService, HotelService hotelService, PostRepository postRepository) {
+        this.postService = postService;
+        this.hotelService = hotelService;
+        this.postRepository = postRepository;
+    }
 
     @GetMapping("/post/admin/add")
     public String showPostForm(Model model) {
@@ -43,27 +52,17 @@ public class PostController {
         }
         model.addAttribute("addPost", postDto);
         postService.addPost(postDto);
-        return "redirect:/homepage";
+        return "redirect:/post/admin/adminpanel";
     }
 
     @GetMapping("/post/{postId}")
 
-    public String showSinglePost(@PathVariable String postId, Model model) {//Spring pozwala nam w mapowaniu wykorzystać tzw. path variables->skazujemy że w pewnym miejscu adresu URL będzie informacja którą chcemy uzyskać
-        //  PostDto postDto = new PostDto(Long.valueOf(postId), "Tytul posta ktory bedzie wyswietlony", "tekst posta");
+    public String showSinglePost(@PathVariable String postId, Model model) {
+
         PostDto postDto = postService.getSinglePost(Integer.valueOf(postId));
-        model.addAttribute("post", postDto);  //Model przekazuje  do widoku nasz komunikat za pomoca klucza (nazwy atrybutu)
+        model.addAttribute("post", postDto);
+  //      model.addAttribute("addItem", new ItemEntity());
         return "posts/singlePost";
     }
 
-    @GetMapping("/post/admin/edit")
-    public String showEditPostForm(Model model) {
-
-        return "posts/admin/editPost";
-    }
-
-    @GetMapping("/post/admin/remove")
-    public String showRemovePostForm(Model model) {
-
-        return "posts/admin/removePost";
-    }
 }

@@ -9,6 +9,8 @@ import pl.sda.sda_biuro_podrozy.entities.UserEntity;
 import pl.sda.sda_biuro_podrozy.repository.RoleRepository;
 import pl.sda.sda_biuro_podrozy.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -39,6 +41,9 @@ public class UserService {
 
         userRepository.save(user);
 
+    }
 
+    public Optional<UserEntity> getUserById(Integer userId) {
+        return userRepository.findById(userId);
     }
 }

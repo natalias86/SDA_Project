@@ -5,7 +5,37 @@
     <title>Edit post</title>
 </head>
 <body>
-<h1>TODO: Edit post:</h1>
+<h1>Edit post:</h1>
+<form method="post" th:action="@{/post/admin/add}" th:object="${editPost}">
+
+    Enter title: <input type="text" th:field="*{postTitle}" th:errorClass="error"><span th:errors="*{postTitle}"></span>
+    <br>
+    Enter description: <input type="text" th:field="*{postDescription}" th:errorClass="error"><span th:errors="*{postDescription}"></span>
+    <br>
+    Enter start date:<input type="date" th:field="*{startDate}" th:errorClass="error"><span th:errors="*{startDate}"></span>
+    <br>
+    Enter end date:<input type="date" th:field="*{endDate}" th:errorClass="error"><span th:errors="*{endDate}"></span>
+    <br>
+    Price for person: <input type="text" th:field="*{price}" th:errorClass="error"><span th:errors="*{price}"></span>
+    <label>PLN</label>
+    <br>
+    Enter type:<input type="text" th:field="*{type}" th:errorClass="error"><span th:errors="*{type}"></span>
+    <br>
+    Enter vacancies:<input type="text" th:field="*{vacancy}" th:errorClass="error"><span th:errors="*{vacancy}"></span>
+    <br>
+    <label>Select hotel:</label>
+    <select th:field="*{hotelEntity.hotelId}">
+        <option th:each="dropDownHotel: ${hotelsList}"
+                th:value="${dropDownHotel.hotelId}"
+                th:text="${dropDownHotel.name}"
+        />
+    </select>
+    <label>Currently promoted</label>
+    <input type="Checkbox" th:field="*{promoted}"  th:checked="${true}">
+
+    <br>
+    <input type="submit" value="edit">
+</form>
 
 </body>
 </html>

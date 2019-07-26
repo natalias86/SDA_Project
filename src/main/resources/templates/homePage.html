@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
@@ -7,101 +8,184 @@
             src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
             crossorigin="anonymous"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="css/style-main.css">-->
+
+    <style>
+
+
+        #left {
+            display: table-cell;
+            font-family: Tahoma;
+            font-size: 12px;
+            background-color: #96c9eb;
+            min-height: 150px;
+            width: 25%;
+            padding: 15px;
+
+        }
+
+        #middle {
+            display: table-cell;
+            font-family: Tahoma;
+            font-size: 16px;
+            background-color: white;
+            min-height: 150px;
+            width: 50%;
+            padding: 15px;
+
+        }
+
+        #right {
+            display: table-cell;
+            font-family: Tahoma;
+            font-size: 12px;
+            background-color: #96c9eb;
+            min-height: 150px;
+            width: 25%;
+            padding: 15px;
+        }
+    </style>
+
 </head>
 <body>
 
-<h1> Home Page - Travel Agency</h1>
-<a th:href="@{/login}">login</a>
+
+<div th:replace="fragments/header :: header"></div>
+
+
+<!--<h1> Home Page - Travel Agency</h1>-->
+
+<!--<a th:href="@{/login}">login</a>
 <a th:href="@{/logout}">logout</a>
-<a th:href="@{/post/admin/adminpanel}">Admin panel</a>
+<a th:href="@{/post/admin/adminpanel}">Admin panel</a>-->
+<div id="left">
+    <div>
+        <h3>Last minute:</h3>
+        <div th:each="post : ${postsLastMinute}">
+            <img style="padding: 0px 10px 0px 0px" src="/css/images/exampleImage2.jpg" alt="image not available"
+                 align="left" width="130"
+                 height="100"/>
+            <p th:text="${post.postTitle}"></p>
+            <label>Price: </label>
+            <span th:text="${post.price}">price: </span>
+            <label>PLN/per</label>
+            <br>
+            <label>Start date:</label>
+            <span th:text="${post.startDate}">start date: </span>
+            <br>
+            <label>End date:</label>
+            <span th:text="${post.endDate}">end date: </span>
+            <br>
+            <label>Type:</label>
+            <span th:text="${post.type}"></span>
+            <br>
 
-<form id="search"  method="get" th:action="@{/homepage}" th:object="${criteriaForm}">
-    <br>
-    <select class="reload-page" name="continentId">
-        <option th:each="dropDownContinent: ${continentsList}"
-                th:value="${dropDownContinent.continentId}"
-                th:text="${dropDownContinent.continent}"
-        />
-    </select>
+            <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
 
-    <select class="reload-page" name="countryId">
-        <option th:each="dropDownCountry: ${countriesList}"
-                th:value="${dropDownCountry.countryId}"
-                th:text="${dropDownCountry.country}"
-        />
-
-    </select>
-    <select class="reload-page" name="cityId">
-        <option th:each="dropDownCity: ${citiesList}"
-                th:value="${dropDownCity.cityId}"
-                th:text="${dropDownCity.city}"
-        />
-    </select>
-<!--    <select>
-         <option th:each="dropDownHotel : ${hotelsListByStandard}"
-            th:value="${dropDownHotel.hotelId}"
-            th:text="${dropDownHotel.standard}"
-        />
-    </select>-->
-    <!--
- <select th:field="*{hotelEntity.hotelId}>
-     <option th:each="dropDownHotel : ${hotelsList}"
-             th:value="${dropDownHotel.hotelId}"
-             th:text="${dropDownHotel.name}"
-     />
- </select>
- -->
-
-    <input type="submit" value="select">
-    <!-- <input type="button" value="find">-->
-</form>
-
-<div>
-    <h3>All travels:</h3>
-    <div th:each="post : ${allPosts}">
-        <p th:text="${post.postTitle}"></p>
-        <p th:textarea="${post.postDescription}"></p>
-        <label>Price: </label>
-        <span th:text="${post.price}">price: </span>
-        <label>PLN</label>
-        <br>
-        <label>Start date:</label>
-        <span th:text="${post.startDate}">start date: </span>
-        <br>
-        <label>End date:</label>
-        <span th:text="${post.endDate}">end date: </span>
-        <br>
-        <label>Type:</label>
-        <span th:text="${post.type}"></span>
-        <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
-        <br>
-        <hr/>
+            <br>
+            <hr/>
+        </div>
     </div>
 </div>
-<!-- <h3>Promoted:</h3>
- <div th:each="post : ${allPosts}">
-     <div th:if="${post.isPromoted}">
 
-         <p th:text="${post.postTitle}"></p>
-         <p th:textarea="${post.postDescription}"></p>
-         <p th:text="${post.price}"></p>
-         <p th:text="${post.startDate}"></p>
-         <p th:text="${post.endDate}"></p>
-         <p th:text="${post.type}"></p>
-         <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
-         <br>
 
-         <hr/>
-     </div>
- </div>-->
+<div id="middle">
+    <form id="search" method="get" th:action="@{/homepage}" th:object="${criteriaForm}">
+        <br>
+        <select class="reload-page" name="continentId">
+            <option value="">Choose continent</option>
+            <option th:each="dropDownContinent: ${continentsList}"
+                    th:value="${dropDownContinent.continentId}"
+                    th:selected="${dropDownContinent.continentId}==*{continentId}"
+                    th:text="${dropDownContinent.continent}"
+            />
+        </select>
+
+        <select class="reload-page" name="countryId">
+            <option value="">Choose country</option>
+            <option th:each="dropDownCountry: ${countriesList}"
+                    th:value="${dropDownCountry.countryId}"
+                    th:text="${dropDownCountry.country}"
+                    th:selected="${dropDownCountry.countryId}==*{countryId}"
+            />
+
+        </select>
+        <select class="reload-page" name="cityId">
+            <option value="">Choose city</option>
+            <option th:each="dropDownCity: ${citiesList}"
+                    th:value="${dropDownCity.cityId}"
+                    th:text="${dropDownCity.city}"
+                    th:selected="${dropDownCity.cityId}==*{cityId}"
+            />
+        </select>
+<a href="/homepage">reset criteria</a>
+        <div th:each="post : ${posts}">
+            <img style="padding: 0px 10px 0px 0px" th:src="@{/css/images/exampleImage3.jpg}" alt="image not available"
+                 align="left" width="150"
+                 height="100"/>
+            <b><p th:text="${post.postTitle}"></p></b>
+            <label>Price: </label>
+            <span th:text="${post.price}">price: </span>
+            <label>PLN/person</label>
+            <br>
+            <label>Start date:</label>
+            <span th:text="${post.startDate}">start date: </span>
+            <br>
+            <label>End date:</label>
+            <span th:text="${post.endDate}">end date: </span>
+            <br>
+            <label>Type:</label>
+            <span th:text="${post.type}"></span>
+            <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
+            <br>
+            <hr/>
+        </div>
+    </form>
+</div>
+
+<div id="right">
+    <div>
+        <h3>Promoted:</h3>
+        <div th:each="post : ${postsPromoted}">
+            <img style="padding: 0px 10px 0px 0px" src="css/images/exampleImage4.jpg" alt="image not available"
+                 align="left" width="130"
+                 height="100"/>
+            <p th:text="${post.postTitle}"></p>
+            <!--   <p th:text="${post.postDescription}"></p>-->
+            <label>Price: </label>
+            <span th:text="${post.price}">price: </span>
+            <label>PLN/per</label>
+            <br>
+            <label>Start date:</label>
+            <span th:text="${post.startDate}">start date: </span>
+            <br>
+            <label>End date:</label>
+            <span th:text="${post.endDate}">end date: </span>
+            <br>
+            <label>Type:</label>
+            <span th:text="${post.type}"></span>
+            <br>
+            <a th:href="@{/post/{id}(id=${post.postId})}">See details</a>
+            <br>
+            <hr/>
+        </div>
+    </div>
+</div>
 
 </body>
-<script>
-    $(document).ready(function () {
-        $('.reload-page').change(function () {
-            $('#search').submit()
-        });
-    });
-</script>
 
+<script>
+
+    $(document).ready(function () {
+
+        $('.reload-page').change(function () {
+
+            $('#search').submit()
+
+        });
+
+    });
+
+</script>
 </html>

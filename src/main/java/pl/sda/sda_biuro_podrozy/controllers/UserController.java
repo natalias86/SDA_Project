@@ -1,4 +1,4 @@
-package pl.sda.sda_biuro_podrozy;
+package pl.sda.sda_biuro_podrozy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

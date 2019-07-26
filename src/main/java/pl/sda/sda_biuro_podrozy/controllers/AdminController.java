@@ -1,4 +1,4 @@
-package pl.sda.sda_biuro_podrozy;
+package pl.sda.sda_biuro_podrozy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.sda_biuro_podrozy.dto.CityDto;
 import pl.sda.sda_biuro_podrozy.dto.CountryDto;
 import pl.sda.sda_biuro_podrozy.dto.HotelDto;
+import pl.sda.sda_biuro_podrozy.dto.PostDto;
 import pl.sda.sda_biuro_podrozy.entities.*;
 import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import pl.sda.sda_biuro_podrozy.service.*;
@@ -61,7 +62,7 @@ public class AdminController {
         }
         model.addAttribute("addCountry", countryDto);
         countryService.addCountry(countryDto);
-        return "redirect:/homepage";
+        return "redirect:/post/admin/adminpanel";
     }
 
     @GetMapping("/post/admin/addcity")
@@ -79,7 +80,7 @@ public class AdminController {
         }
         model.addAttribute("addCity", cityDto);
         cityService.addCity(cityDto);
-        return "redirect:/homepage";
+        return "redirect:/post/admin/adminpanel";
     }
 
     @GetMapping("/post/admin/addhotel")
@@ -91,16 +92,15 @@ public class AdminController {
     }
 
     @PostMapping("/post/admin/addhotel")
-    public String addCity(@ModelAttribute @Valid HotelDto hotelDto, BindingResult bindingResult, Model model) {
+    public String addHotel(@ModelAttribute @Valid HotelDto hotelDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "posts/admin/addHotel";
         }
         model.addAttribute("addHotel", hotelDto);
         hotelService.addHotel(hotelDto);
-        return "redirect:/homepage";
+        return "redirect:/post/admin/adminpanel";
     }
 
-    //TODO check if get
     @GetMapping("/post/admin/delete/{postId}")
     public String deletePost(@PathVariable("postId") String postId, Model model) {
         PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
@@ -110,8 +110,13 @@ public class AdminController {
         return "redirect:/post/admin/adminpanel";
     }
 
+    //TODO: update -> dropdownlist and date do not work
     @GetMapping("/post/admin/edit/{postId}")
     public String editPost(@PathVariable("postId") String postId, Model model) {
+        PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
+        model.addAttribute("editPost", postEntity);
         return "posts/admin/editPost";
     }
+
 }
