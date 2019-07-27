@@ -2,18 +2,19 @@ package pl.sda.sda_biuro_podrozy.cart;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.thymeleaf.expression.Lists;
+import org.assertj.core.util.Lists;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+
 @Setter
 public class Cart {
 
     private BigDecimal price;
-    private List<ItemEntity> itemList = new ArrayList<>();//Lists.newArrayList();
+    private List<ItemEntity> itemList = Lists.newArrayList();
 
     public List<ItemEntity> getCartItems() {
         return itemList;

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.sda.sda_biuro_podrozy.entities.CustomerEntity;
 import pl.sda.sda_biuro_podrozy.entities.UserEntity;
 
-//@Repository
+@Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer>{
 
         boolean existsByUserEntity(UserEntity userEntity);

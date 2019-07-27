@@ -116,6 +116,8 @@ public class AdminController {
         PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
         model.addAttribute("editPost", postEntity);
+        List<HotelEntity> hotelsList = hotelService.getListOfHotels();
+        model.addAttribute("hotelsList", hotelsList);
         return "posts/admin/editPost";
     }
 

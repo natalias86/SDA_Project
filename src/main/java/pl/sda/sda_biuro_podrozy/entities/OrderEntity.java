@@ -8,12 +8,12 @@ import pl.sda.sda_biuro_podrozy.cart.ItemEntity;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
 @Table(name="orders")
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderEntity {
+public class
+OrderEntity {
 
 
     @Id
@@ -24,10 +24,9 @@ public class OrderEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id", nullable = false)
     private ItemEntity itemEntity;
-
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    CustomerEntity  customerEntity;
+    @JoinColumn(name = "userId", nullable = false)
+   UserEntity  userEntity;
 
 }
 

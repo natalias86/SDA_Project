@@ -46,4 +46,10 @@ public class UserService {
     public Optional<UserEntity> getUserById(Integer userId) {
         return userRepository.findById(userId);
     }
+
+/*    public Optional<UserEntity> getUserByEmail(){
+
+        return userRepository.findFirstByEmail(getLoggedUserEmail());
+
+    }*/
 }

@@ -5,19 +5,17 @@
     <div th:fragment="header-libs">
         <div>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-            <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+            <script type="text/javascript"
+                    src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         </div>
 
-
     </div>
-
-
 </head>
 <body>
 
@@ -26,19 +24,21 @@
     <div th:fragment="header" style="background-color:#24a3f2; color:white;">
 
 
+        <div style="float: right;">
 
-              <div  style="float: right;">
+
+            <a href="/register">Sign up</a>
+            <a href="/login">Login</a>
+            <a href="/logout">Logout</a>
+            <a href="/post/admin/adminpanel">Admin panel</a>
+            <div th:if="${@userContextService.getLoggedUserEmail()}"
+                 th:text="'Zalogowano jako: '+ ${@userContextService.getLoggedUserEmail()}">
+            </div>
+
+            <a href="/cart">Your shopping cart</a>
 
 
-                    <a href="/register">Sign up</a>
-                    <a href="/login">Login</a>
-                    <a href="/logout">Logout</a>
-                    <a href="/post/admin/adminpanel">Admin panel</a>
-                  <div th:if="${@userContextService.getLoggedUserEmail()}"
-                       th:text="'Zalogowano jako: '+ ${@userContextService.getLoggedUserEmail()}">
-                  </div>
-
-              </div>
+        </div>
         <p>
 
             <img alt="image not available" src="/css/images/palm.png" width="80"
@@ -46,7 +46,8 @@
             <span style="font-size: 50px; "><i><b>SDA Travel Agency</b></i></span>
         </p>
 
-</div>
+
+    </div>
 
 </div>
 

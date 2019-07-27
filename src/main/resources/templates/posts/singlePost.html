@@ -28,7 +28,7 @@
     <label>PLN/person</label>
     <br>
 
-<form method="post" th:action="@{/cart/post/{postId}}">
+<form method="post" th:action="@{'/post/'+${post.postId}}">
 <!--
     Enter number of travelers: <input type="text" th:field="*{numberOfTravelers}">
     <br>

@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "users")
@@ -43,5 +45,8 @@ public class UserEntity {
         }
         roles.add(roleEntity);
     }
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
+    private List<OrderEntity> ordersList = new ArrayList<>();
 
 }

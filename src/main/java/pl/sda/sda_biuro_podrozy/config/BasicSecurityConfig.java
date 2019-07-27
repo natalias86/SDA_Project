@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @Configuration
 public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private DataSource dataSource; //skonfigurowany przez hibernata
+    private DataSource dataSource;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -23,6 +23,8 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/post/admin/**")
                 .hasRole("ADMIN")//bedzie miało dodany przez Springa prefix ROLE_do roli -> lub: .hasAthority("ROLE_ADMIN")
+               /* .antMatchers("/order")
+                .hasRole("USER")*/
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()

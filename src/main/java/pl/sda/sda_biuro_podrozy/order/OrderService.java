@@ -11,9 +11,8 @@ import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import pl.sda.sda_biuro_podrozy.repository.UserRepository;
 import pl.sda.sda_biuro_podrozy.service.UserContextService;
 
-//@Service
+@Service
 public class OrderService {
-/*
 
     @Autowired
     private UserContextService userContextService;
@@ -29,9 +28,9 @@ public class OrderService {
 
     @Autowired
     private PostRepository postRepository;
-
+/*
     public OrderEntity placeOrder() {
-        Cart cart = userContextService.getCart();
+        Cart cart = userContextService.getCartElements();
         String loggedUserEmail = userContextService.getLoggedUserEmail();
         UserEntity userEntity = userRepository.findByEmail(loggedUserEmail);
 
@@ -42,7 +41,7 @@ public class OrderService {
         Order order = ordersRepository.save(new Order(customer.getUsername(), cartService.calculateTotalCartPrice(cart), customer.getUserAddress(), customer.getUserAddress(), LocalDateTime.now(), cart.getOrderLines(), customer, OrderStatus.NEW));
         userContextService.clearCart();
         return order;
-    }
+}
 }*/
 
 }

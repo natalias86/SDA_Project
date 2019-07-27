@@ -19,14 +19,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Id
+ //   @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private int itemId;
 
 
     @Column
-
     private Integer numberOfTravelers;
 
     @OneToOne

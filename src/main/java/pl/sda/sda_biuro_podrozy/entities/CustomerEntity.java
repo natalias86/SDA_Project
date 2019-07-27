@@ -17,7 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
@@ -36,7 +35,7 @@ public class CustomerEntity {
 
     @Column(name = "city")
     private String city;
-
+/*
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL)
-    private List<OrderEntity> ordersList = new ArrayList<>();
+    private List<OrderEntity> ordersList = new ArrayList<>();*/
 }

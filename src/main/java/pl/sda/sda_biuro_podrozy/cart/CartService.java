@@ -26,13 +26,20 @@ public class CartService {
         }
         else{
             ItemEntity item = new ItemEntity();
+            item.setItemId(items.size()+1);
             item.setPostEntity(newItem.getPostEntity());
             item.setNumberOfTravelers(1);
-            items.add( item);
+            items.add(item);
         }
     }
+public void removeItemFromCart(Integer  itemId){
+    List<ItemEntity> items = cart.getCartItems();
+    items.remove(itemId-1);
+}
 
-    public List<ItemEntity> getCart(){
+
+    public List<ItemEntity> getCartElements(){
+
         return cart.getCartItems();
 
     }
