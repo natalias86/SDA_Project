@@ -23,7 +23,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/post/admin/**")
                 .hasRole("ADMIN")//bedzie miało dodany przez Springa prefix ROLE_do roli -> lub: .hasAthority("ROLE_ADMIN")
-               /* .antMatchers("/order")
+           /*     .antMatchers("/order")
                 .hasRole("USER")*/
                 .anyRequest().permitAll()
                 .and()

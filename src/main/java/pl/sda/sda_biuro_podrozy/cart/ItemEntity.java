@@ -26,13 +26,14 @@ public class ItemEntity {
 
 
     @Column
+    @Min(value=1, message="incorrect number")
     private Integer numberOfTravelers;
 
     @OneToOne
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity postEntity;
 
-    @Min(value=1, message="incorrect number")
+
     public ItemEntity(int numberOfTravelers) {
         this.numberOfTravelers = numberOfTravelers;
     }
@@ -41,5 +42,6 @@ public class ItemEntity {
         this.numberOfTravelers = numberOfTravelers;
         this.postEntity = postEntity;
     }
+
 
 }

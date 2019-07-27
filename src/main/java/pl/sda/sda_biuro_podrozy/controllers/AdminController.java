@@ -106,15 +106,15 @@ public class AdminController {
         PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
         postRepository.delete(postEntity);
-        // model.addAttribute("postToDelete", userRepository.findAll());
+
         return "redirect:/post/admin/adminpanel";
     }
 
-    //TODO: update -> dropdownlist and date do not work
+
     @GetMapping("/post/admin/edit/{postId}")
     public String editPost(@PathVariable("postId") String postId, Model model) {
         PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
-                .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
+   /**/             .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
         model.addAttribute("editPost", postEntity);
         List<HotelEntity> hotelsList = hotelService.getListOfHotels();
         model.addAttribute("hotelsList", hotelsList);

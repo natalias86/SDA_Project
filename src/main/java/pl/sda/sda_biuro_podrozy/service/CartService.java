@@ -1,8 +1,11 @@
-package pl.sda.sda_biuro_podrozy.cart;
+package pl.sda.sda_biuro_podrozy.service;
 
 import lombok.Getter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
+import pl.sda.sda_biuro_podrozy.cart.Cart;
+import pl.sda.sda_biuro_podrozy.cart.ItemEntity;
+import pl.sda.sda_biuro_podrozy.entities.PostEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,7 +42,6 @@ public void removeItemFromCart(Integer  itemId){
 
 
     public List<ItemEntity> getCartElements(){
-
         return cart.getCartItems();
 
     }
@@ -55,6 +57,5 @@ public void removeItemFromCart(Integer  itemId){
     public void clearCart(){
         this.cart.clearCart();
     }
-
 
 }

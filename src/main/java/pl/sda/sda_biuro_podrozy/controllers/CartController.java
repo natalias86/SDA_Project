@@ -1,4 +1,4 @@
-package pl.sda.sda_biuro_podrozy.cart;
+package pl.sda.sda_biuro_podrozy.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,18 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.sda.sda_biuro_podrozy.service.CartService;
+import pl.sda.sda_biuro_podrozy.cart.ItemEntity;
 import pl.sda.sda_biuro_podrozy.entities.PostEntity;
-import pl.sda.sda_biuro_podrozy.entities.UserEntity;
+
+import pl.sda.sda_biuro_podrozy.repository.ItemRepository;
 import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import pl.sda.sda_biuro_podrozy.service.PostService;
 import pl.sda.sda_biuro_podrozy.service.UserContextService;
 import pl.sda.sda_biuro_podrozy.service.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 
 @Controller
@@ -56,10 +56,9 @@ public class CartController {
     @GetMapping("/cart")
     public String showCart(Model model) {
 
-
         model.addAttribute("totalPrice", cartService.calculateTotalPrice());
         model.addAttribute("cart", new CardForm(cartService.getCartElements()));
-        //      model.addAttribute("user", userContextService.getUser().orElse(new UserEntity()));
+
 
         return "cart/cartElements";
     }
@@ -73,62 +72,16 @@ public class CartController {
         private Collection<ItemEntity> items;
     }
 
-    @PostMapping("/cart")
-    public String confirmOrder(@ModelAttribute @Valid ItemEntity itemEntity, BindingResult bindingResult, Model model) {
-        model.addAttribute("totalPrice", cartService.calculateTotalPrice());
-        //  model.addAttribute("cart", new CardForm(cartService.getCartElements()));
-        model.addAttribute("user", userContextService.getUser().orElse(new UserEntity()));
-
-        return "redirect:/order";
-
-       // model.addAttribute("totalPrice", );
-
-        //      model.addAttribute("user", userContextService.getUser().orElse(new UserEntity()));
-
-        return "order";
-    }
 
     @GetMapping("/cart/remove/{itemId}")
     public String removeItem(@PathVariable Integer itemId, Model model) {
+
         cartService.removeItemFromCart(itemId);
 
 //TODO: update itemId
         return "redirect:/cart";
     }
 
-
-
-    @GetMapping("/order")
-    public String buyChosenTravels() {
-        return "summaryForm";
-    }
-    // @GetMapping("/orders")
-
-    //  public String showOrder(Model model, RedirectAttributes redirectAttributes){
-
-
-/*
-        if (userServices.isAdmin())
-
-        {
-
-            model.addAttribute("orders", orderServices.getAllOrders());
-
-            return "orders";
-
-        }*/
-
-/*
-
-        if(userContextService.getUser().isPresent()) {
-            model.addAttribute("orders", orderServices.getUserOrders(userServices.getUser().get()));
-            return "order";
-        }
-        else{
-            model.addAttribute("orders",new ArrayList<>());
-            return "orders";
-        }}
-*/
 
 
 }

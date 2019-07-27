@@ -2,11 +2,7 @@ package pl.sda.sda_biuro_podrozy.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sda.sda_biuro_podrozy.cart.Cart;
-import pl.sda.sda_biuro_podrozy.cart.CartService;
-import pl.sda.sda_biuro_podrozy.entities.CustomerEntity;
-import pl.sda.sda_biuro_podrozy.entities.OrderEntity;
-import pl.sda.sda_biuro_podrozy.entities.UserEntity;
+import pl.sda.sda_biuro_podrozy.service.CartService;
 import pl.sda.sda_biuro_podrozy.repository.PostRepository;
 import pl.sda.sda_biuro_podrozy.repository.UserRepository;
 import pl.sda.sda_biuro_podrozy.service.UserContextService;

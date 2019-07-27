@@ -5,43 +5,20 @@
     <title>Summary form</title>
 </head>
 <body>
-<table>
-    <tr>
+<h3>Summary:</h3>
+<label>First name: </label>
+        <span th:text="${user.firstName}"></span><br>
+<label>Last name: </label>
+        <span th:text="${user.lastName}"></span><br>
+<label>E-mail: </label>
+        <span th:text="${user.email}"></span>
 
-        <th>First name: </th>
-        <th>Last name:</th>
-        <th>E-mail:</th>
 
-    </tr>
-    <tr>
-
-        <td>First name: </td>
-        <td>Last name:</td>
-        <td>E-mail:</td>
-
-    </tr>
     <br>
-</table>
-<table>
-    <tr>
 
-        <th>Id</th>
-        <th>Title</th>
-        <th>No of travellers</th>
-        <th>Price per person</th>
-    </tr>
-    <tr>
+    <h4 th:text=" 'Total to pay: ' +${totalPrice} + ' PLN'"></h4>
 
-        <!--<td><span th:text="${item.itemId}"></span></td>
-        <td><span th:text="${item.postEntity.postTitle}"></span></td>
-        &lt;!&ndash;            <td><input type="number" th:field="${item[__${stat.index}__}]numberOfTravelers}"></td>&ndash;&gt;
-        <td><input type="number" th:field="*{items[__${stat.index}__].numberOfTravelers}"></td>
-        <input type="hidden" th:field="*{items[__${stat.index}__].itemId}">
-        <td><span th:text="${item.postEntity.price}"></span><label> PLN</label></td>-->
-    </tr>
-    <h4 th:text=" 'Total: ' +${totalPrice} + ' PLN'"></h4>
 
-</table>
 <input type="submit" value="Buy chosen travels">
 </body>
 </html>
