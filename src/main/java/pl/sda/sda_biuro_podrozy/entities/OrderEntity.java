@@ -34,11 +34,19 @@ OrderEntity {
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_id", nullable = false)
-    private ItemEntity itemEntity;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderEntity")
+    private Set<ItemEntity> items = new HashSet<>();
+
+    public void addItem(ItemEntity itemEntity) {
+        if (items == null) {
+            items = new HashSet<>();
+        }
+        items.add(itemEntity);
+        itemEntity.setOrderEntity(this);
+    }
+
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId")
     UserEntity userEntity;
 
 }

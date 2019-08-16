@@ -7,7 +7,7 @@
 <body>
 
 <h3>Shopping Cart:</h3>
-
+<!--<div th:text="${user.email != null} ? 'Dane użytkownika: ' +${user.email} : ''"></div>-->
 <table cellpadding="2" cellspacing="2" border="1">
     <tr>
 
@@ -20,7 +20,7 @@
         <th>Remove item</th>
        <!-- <th>Sub Total</th>-->
     </tr>
-<form method="post" th:action="@{/cart}" th:object="${cart}">
+<form id="search" method="post" th:action="@{/cart}" th:object="${cart}">
 
     <div th:each="item, stat : ${cart.items}">
 
@@ -44,7 +44,7 @@
         </tr>
 
   </div>
-
+<input type="submit" value="Confirm order">
 </form>
 </table>
 <br>
@@ -52,6 +52,20 @@
 <h4 th:text=" 'Total: ' +${totalPrice} + ' PLN'"></h4>
 <a href="/homepage">Continue Shopping</a>
 <br>
-<a href="/order">Corfirm</a>
+
 </body>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.reload-page').change(function () {
+
+            $('#search').submit()
+
+        });
+
+    });
+
+</script>
 </html>

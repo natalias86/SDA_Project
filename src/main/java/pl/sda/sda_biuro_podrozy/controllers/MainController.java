@@ -50,6 +50,8 @@ public class MainController {
         }
     }
 
+
+
     @RequestMapping(value = "/homepage", method = {RequestMethod.GET})
     public String showMainForm(@ModelAttribute("criteriaForm") SelectedCriteriaForm form, Model model) {
 

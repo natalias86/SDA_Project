@@ -14,7 +14,7 @@ public class OrderService {
     private UserContextService userContextService;
 
     @Autowired
-    private OrdersRepository ordersRepository;
+    private OrderRepository ordersRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -39,5 +39,7 @@ public class OrderService {
         return order;
 }
 }*/
+
+
 
 }

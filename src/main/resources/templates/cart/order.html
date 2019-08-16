@@ -12,11 +12,12 @@
         <span th:text="${user.lastName}"></span><br>
 <label>E-mail: </label>
         <span th:text="${user.email}"></span>
-
+<label>Date of placing the order: </label>
+<span th:text="${order.orderDate}"></span>
 
     <br>
 
-    <h4 th:text=" 'Total to pay: ' +${totalPrice} + ' PLN'"></h4>
+    <h4 th:text=" 'Total to pay: ' +${order.totalPrice} + ' PLN'"></h4>
 
 
 <input type="submit" value="Buy chosen travels">

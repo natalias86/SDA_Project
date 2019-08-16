@@ -110,15 +110,25 @@ public class AdminController {
         return "redirect:/post/admin/adminpanel";
     }
 
-
+//edit date
     @GetMapping("/post/admin/edit/{postId}")
-    public String editPost(@PathVariable("postId") String postId, Model model) {
+    public String showEditPost(@PathVariable("postId") String postId, Model model) {
         PostEntity postEntity = postRepository.findById(Integer.valueOf(postId))
-   /**/             .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
+                 .orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + postId));
         model.addAttribute("editPost", postEntity);
         List<HotelEntity> hotelsList = hotelService.getListOfHotels();
         model.addAttribute("hotelsList", hotelsList);
         return "posts/admin/editPost";
+    }
+
+    @PostMapping("/post/admin/edit/{postId}")
+    public String editPost(@PathVariable("postId") Integer postId,@ModelAttribute ("editPost") @Valid PostDto postDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "posts/admin/editPost";
+        }
+        model.addAttribute("editPost", postDto);
+        postService.editSinglePost(postDto, postId);
+        return "redirect:/post/admin/adminpanel";
     }
 
 }

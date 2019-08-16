@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.sda.sda_biuro_podrozy.entities.CityEntity;
+import pl.sda.sda_biuro_podrozy.entities.OrderEntity;
 import pl.sda.sda_biuro_podrozy.entities.PostEntity;
 
 import javax.persistence.*;
@@ -19,11 +20,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemEntity {
-@Id
- //   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
-    private int itemId;
-
+    private Integer itemId;
 
     @Column
     @Min(value=1, message="incorrect number")
@@ -33,6 +33,9 @@ public class ItemEntity {
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity postEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity orderEntity;
 
     public ItemEntity(int numberOfTravelers) {
         this.numberOfTravelers = numberOfTravelers;

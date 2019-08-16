@@ -37,6 +37,20 @@ public class PostService {
         postRepository.save(post);
     }
 
+    public void editSinglePost(PostDto postDto, Integer postId) {
+        PostEntity postEdited = postRepository.findById(postId).get();
+        postEdited.setPostTitle(postDto.getPostTitle());
+        postEdited.setPostDescription(postDto.getPostDescription());
+        postEdited.setPrice(postDto.getPrice());
+        postEdited.setStartDate(LocalDate.parse(postDto.getStartDate()));
+        postEdited.setEndDate(LocalDate.parse(postDto.getEndDate()));
+        postEdited.setVacancy(postDto.getVacancy());
+        postEdited.setType(postDto.getType());
+        postEdited.setHotelEntity(postDto.getHotelEntity());
+        postEdited.setPromoted(postDto.isPromoted());
+        postRepository.save(postEdited);
+    }
+
     public List<PostEntity> getPublishedPosts() {
         List<PostEntity> posts = postRepository.findAll();
         return posts;
